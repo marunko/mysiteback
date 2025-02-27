@@ -10,12 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
-import environ
+#import environ
 
 from pathlib import Path
 # Initialize environment variables
-env = environ.Env()
-environ.Env.read_env()
+#env = environ.Env()
+#environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'myapp',
     'corsheaders',
+    #'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +58,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 CORS_ALLOW_ALL_ORIGINS = True
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
+ 
 
 ROOT_URLCONF = 'config.urls'
 
@@ -135,3 +136,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Use Redis as the message broker
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+
+# Time zone settings (use your preferred time zone)
+CELERY_TIMEZONE = 'UTC'
+
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
