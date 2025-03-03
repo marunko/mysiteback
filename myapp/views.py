@@ -65,19 +65,26 @@ class AboutMeView(APIView):
         tag = validate_token(request)
         if isinstance(tag, Response):
             return tag
-        about_me = AboutMe.objects.filter(tag=tag)
-        return Response(AboutMeSerializer(about_me, many=True).data, status=status.HTTP_200_OK)
+        about_me = AboutMe.objects.filter(tag=tag).first()
+        if about_me is None:
+            return Response({"detail": "No AboutMe found for this tag."}, status=status.HTTP_404_NOT_FOUND)
+        return Response(AboutMeSerializer(about_me).data, status=status.HTTP_200_OK)
 
 class ExperienceView(APIView):
     def post(self, request):
         tag = validate_token(request)
         if isinstance(tag, Response):
             return tag
-        experiences = Experience.objects.filter(tag=tag)
+        experiences = Experience.objects.filter(tag=tag).order_by('-start_date')
         data = ExperienceSerializer(experiences, many=True).data
+        
         for item in data:
-            item['job_roles'] = JobRoleSerializer(JobRole.objects.filter(experience=item['id']), many=True).data
+            item['job_roles'] = JobRoleSerializer(
+                JobRole.objects.filter(experience=item['id']), 
+                many=True
+            ).data
         return Response(data, status=status.HTTP_200_OK)
+
 
 class SkillsView(APIView):
     def post(self, request):
@@ -132,3 +139,10 @@ class CheckTokenView(APIView):
             return Response({"access": False}, status=status.HTTP_403_FORBIDDEN)
         
         return Response({"access": True}, status=status.HTTP_200_OK)
+    
+class ContactsView(APIView):
+    def post(self, request):
+        contacts = Contacts.objects.first()
+        if isinstance(contacts, Contacts):     
+            return Response(ContactsSerializer(contacts).data, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_404_NOT_FOUND)

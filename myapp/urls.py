@@ -15,6 +15,7 @@ router.register(r'skill-tags', SkillTagViewSet)
 router.register(r'certifications', CertificationViewSet)
 router.register(r'projects', ProjectsViewSet)
 router.register(r'hobbies', HobbiesViewSet)
+router.register(r'contacts', ContactsViewSet)
 
 urlpatterns = [
     path('hello/', hello_world),
@@ -28,4 +29,5 @@ urlpatterns = [
     path('projects-key/<str:title>/', ProjectByTitleView.as_view(),name='title'),
     path('hobbies-key/', HobbiesView.as_view(), name='token'),# ??
     path('check-token/', CheckTokenView.as_view(),name='token'),
+    path('contacts/',ContactsView.as_view()),
 ]

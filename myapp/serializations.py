@@ -23,7 +23,7 @@ class AboutMeSerializer(serializers.ModelSerializer):
 class ExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Experience
-        fields = ['id', 'tag', 'position', 'company', 'start_date', 'end_date']
+        fields = ['id', 'tag', 'position', 'company', 'start_date', 'end_date', 'reference']
 
 
 class JobRoleSerializer(serializers.ModelSerializer):
@@ -60,3 +60,8 @@ class HobbiesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hobbies
         fields = ['id', 'title', 'summary', 'image_path']
+
+class ContactsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contacts
+        fields = ['id', 'phone', 'email', 'facebook', 'github']

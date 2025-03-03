@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .models import Token, Tag, AboutMe, Experience, JobRole, Skills, SkillTag, Certification, Projects, Hobbies
-from .serializations import TokenSerializer, TagSerializer, AboutMeSerializer, ExperienceSerializer, JobRoleSerializer, SkillsSerializer, SkillTagSerializer, CertificationSerializer, ProjectsSerializer, HobbiesSerializer
+from .models import Contacts, Token, Tag, AboutMe, Experience, JobRole, Skills, SkillTag, Certification, Projects, Hobbies
+from .serializations import ContactsSerializer, TokenSerializer, TagSerializer, AboutMeSerializer, ExperienceSerializer, JobRoleSerializer, SkillsSerializer, SkillTagSerializer, CertificationSerializer, ProjectsSerializer, HobbiesSerializer
 
 class TokenViewSet(viewsets.ModelViewSet):
     queryset = Token.objects.all()
@@ -41,3 +41,7 @@ class ProjectsViewSet(viewsets.ModelViewSet):
 class HobbiesViewSet(viewsets.ModelViewSet):
     queryset = Hobbies.objects.all()
     serializer_class = HobbiesSerializer
+
+class ContactsViewSet(viewsets.ModelViewSet):
+    queryset = Contacts.objects.all()
+    serializer_class = ContactsSerializer

@@ -47,7 +47,7 @@ class Experience(models.Model):
     company = models.CharField(max_length=255)
     start_date = models.DateField()
     end_date = models.DateField(null=True, blank=True)
-    
+    reference = models.URLField(null=True, blank=True) #references to disk
 # references path link
     def __str__(self):
         return f"{self.position} at {self.company}"
@@ -111,3 +111,12 @@ class Hobbies(models.Model):
 
     def __str__(self):
         return self.title
+
+class Contacts(models.Model):
+    phone = models.CharField(max_length=25)
+    email=models.CharField(max_length=255)
+    facebook = models.URLField(null=True, blank=True)
+    github = models.URLField(null=True, blank=True)
+
+    def __str__(self):
+        return self.phone    
