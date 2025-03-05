@@ -31,7 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["marunko.net", "www.marunko.net",'3.17.79.197', 'localhost', '127.0.0.1']
 CSRF_TRUSTED_ORIGINS = ["https://marunko.net"]
-
+# marun 
 
 # Application definition
 
@@ -89,10 +89,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'myapp',
-        #'USER': 'postgres',
-        #'PASSWORD': 'admin',
-        'USER': 'myuser',
-        'PASSWORD': 'mypassword',
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
+        #'USER': 'myuser',
+        #'PASSWORD': 'mypassword',
         'HOST': 'localhost',
         'PORT': '5432',
     }
