@@ -14,8 +14,8 @@ def hello_world(request):
     return Response({"message": "Hello, World!"})
 
 class ProtectedDataView(APIView):
-    def post(self, request):
-        token_key = request.data.get("token")  # Extract token from query params
+    def get(self, request):
+        token_key = request.GET.get("token")  # Extract token from query params
         if not token_key:
             return Response({"error": "Token is required."}, status=status.HTTP_403_FORBIDDEN)
         
@@ -49,7 +49,7 @@ class ProtectedDataView(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
 def validate_token(request):
-    token_key = request.data.get("token")
+    token_key = request.GET.get("token")
     if not token_key:
         return Response({"error": "Token is required."}, status=status.HTTP_403_FORBIDDEN)
     
@@ -61,7 +61,7 @@ def validate_token(request):
     return token.tag
 
 class AboutMeView(APIView):
-    def post(self, request):
+    def get(self, request):
         tag = validate_token(request)
         if isinstance(tag, Response):
             return tag
@@ -71,7 +71,7 @@ class AboutMeView(APIView):
         return Response(AboutMeSerializer(about_me).data, status=status.HTTP_200_OK)
 
 class ExperienceView(APIView):
-    def post(self, request):
+    def get(self, request):
         tag = validate_token(request)
         if isinstance(tag, Response):
             return tag
@@ -87,7 +87,7 @@ class ExperienceView(APIView):
 
 
 class SkillsView(APIView):
-    def post(self, request):
+    def get(self, request):
         tag = validate_token(request)
         if isinstance(tag, Response):
             return tag
@@ -98,7 +98,7 @@ class SkillsView(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
 class CertificationsView(APIView):
-    def post(self, request):
+    def get(self, request):
         tag = validate_token(request)
         if isinstance(tag, Response):
             return tag
@@ -106,7 +106,7 @@ class CertificationsView(APIView):
         return Response(CertificationSerializer(certifications, many=True).data, status=status.HTTP_200_OK)
 
 class ProjectsView(APIView):
-    def post(self, request):
+    def get(self, request):
         tag = validate_token(request)
         if isinstance(tag, Response):
             return tag
@@ -114,7 +114,7 @@ class ProjectsView(APIView):
         return Response(ProjectsSerializer(projects, many=True).data, status=status.HTTP_200_OK)
 
 class ProjectByTitleView(APIView):
-    def post(self, request, title):
+    def get(self, request, title):
         tag = validate_token(request)
         if isinstance(tag, Response):
             return tag
@@ -122,7 +122,7 @@ class ProjectByTitleView(APIView):
         return Response(ProjectsSerializer(project).data, status=status.HTTP_200_OK)
     
 class HobbiesView(APIView):
-    def post(self, request):
+    def get(self, request):
         tag = validate_token(request)
         if isinstance(tag, Response):
             return tag
@@ -130,7 +130,7 @@ class HobbiesView(APIView):
         return Response(HobbiesSerializer(hobbies, many=True).data, status=status.HTTP_200_OK)
 
 class CheckTokenView(APIView):
-    def post(self, request):
+    def get(self, request):
         try:
             tag = validate_token(request)
         except:
@@ -141,7 +141,7 @@ class CheckTokenView(APIView):
         return Response({"access": True}, status=status.HTTP_200_OK)
     
 class ContactsView(APIView):
-    def post(self, request):
+    def get(self, request):
         contacts = Contacts.objects.first()
         if isinstance(contacts, Contacts):     
             return Response(ContactsSerializer(contacts).data, status=status.HTTP_200_OK)
