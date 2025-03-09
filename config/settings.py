@@ -34,6 +34,11 @@ CSRF_TRUSTED_ORIGINS = ["https://marunko.net",  "http://localhost:3000", ]
 # marun 
 CORS_ALLOW_CREDENTIALS = True  # Allow cookies (CSRF, session, etc.)
 # Application definition
+CORS_ALLOWED_ORIGINS = [
+    "https://marunko.net", "http://localhost:3000",   # Replace with your actual domain
+]
+CSRF_COOKIE_SECURE = True  # Enable for production over HTTPS
+SESSION_COOKIE_SECURE = True  # Enable for production over HTTPS
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -58,12 +63,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOWED_ORIGINS = [
-    "https://marunko.net", "http://localhost:3000",   # Replace with your actual domain
-]
-CSRF_COOKIE_SECURE = False  # Enable for production over HTTPS
-SESSION_COOKIE_SECURE = False  # Enable for production over HTTPS
+
+ 
 
 
 ROOT_URLCONF = 'config.urls'
