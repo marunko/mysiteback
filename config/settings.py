@@ -59,7 +59,12 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 CORS_ALLOW_ALL_ORIGINS = True
- 
+CORS_ALLOWED_ORIGINS = [
+    "https://marunko.net",  # Replace with your actual domain
+]
+CSRF_COOKIE_SECURE = True  # Enable for production over HTTPS
+SESSION_COOKIE_SECURE = True  # Enable for production over HTTPS
+
 
 ROOT_URLCONF = 'config.urls'
 
@@ -89,8 +94,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'myapp',
-        #'USER': 'postgres',
-        #'PASSWORD': 'admin',
+       # 'USER': 'postgres',
+       # 'PASSWORD': 'admin',
         'USER': 'myuser',
         'PASSWORD': 'mypassword',
         'HOST': 'localhost',
