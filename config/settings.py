@@ -29,10 +29,10 @@ SECRET_KEY = 'django-insecure-7%-a2lfzb92820!u)76b@vn_7*hm(j7vgi5_7p=125030*hz3c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["marunko.net", "www.marunko.net",'3.17.79.197', 'localhost', '127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ["https://marunko.net"]
+ALLOWED_HOSTS = ["marunko.net", "www.marunko.net",'3.17.79.197', 'localhost', '127.0.0.1',  "http://localhost:3000", ]
+CSRF_TRUSTED_ORIGINS = ["https://marunko.net",  "http://localhost:3000", ]
 # marun 
-
+CORS_ALLOW_CREDENTIALS = True  # Allow cookies (CSRF, session, etc.)
 # Application definition
 
 INSTALLED_APPS = [
@@ -60,7 +60,7 @@ MIDDLEWARE = [
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-    "https://marunko.net",  # Replace with your actual domain
+    "https://marunko.net", "http://localhost:3000",   # Replace with your actual domain
 ]
 CSRF_COOKIE_SECURE = True  # Enable for production over HTTPS
 SESSION_COOKIE_SECURE = True  # Enable for production over HTTPS
