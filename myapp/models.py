@@ -59,7 +59,7 @@ class JobRole(models.Model):
     roles = models.TextField()
 
     def __str__(self):
-        return self.position
+        return self.roles
 
 
 class Skills(models.Model):
